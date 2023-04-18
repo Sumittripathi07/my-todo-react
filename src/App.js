@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import Title from "./components/Title";
+import "./App.css";
+import AddTodo from "./components/AddTodo";
+import Todo from "./components/Todo";
+import {
+  collection,
+  query,
+  onSnapshot,
+  doc,
+  updateDoc,
+  deleteDoc,
+} from "firebase/firestore";
+import { db } from "./firebase";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    const q = query(collection(db, "todos"));
+    const unsub = onSnapshot(q, (querySnapshot) => {
+      let todosArray = [];
+      querySnapshot.forEach((doc) => {
+        todosArray.push({ ...doc.data(), id: doc.id });
+      });
+      setTodos(todosArray);
+    });
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="App">
+        <div>
+          <Title />
+        </div>
+        <div>
+          <AddTodo />
+        </div>
+      </div>
+    </>
   );
 }
 
