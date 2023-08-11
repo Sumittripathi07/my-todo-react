@@ -9,7 +9,7 @@ const AddTodo = () => {
     if (title !== "") {
       await addDoc(collection(db, "todos"), {
         title,
-        completed: false,
+        // completed: false,
       });
       setTitle("");
     }
