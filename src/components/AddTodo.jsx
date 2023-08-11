@@ -26,7 +26,7 @@ const AddTodo = () => {
           />
         </div>
         <div className="btn_container">
-          <button>Add</button>
+          <button>Add TODO</button>
         </div>
       </form>
     </>

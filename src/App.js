@@ -7,7 +7,7 @@ import {
   query,
   onSnapshot,
   doc,
-  updateDoc,
+  // updateDoc,
   deleteDoc,
 } from "firebase/firestore";
 import { db } from "./firebase";
@@ -28,15 +28,15 @@ function App() {
     return () => unsub();
   }, []);
 
-  const handleEdit = async (todo, title) => {
-    await updateDoc(doc(db, "todos", todo.id), { title: title });
-  };
+  // const handleEdit = async (todo, title) => {
+  //   await updateDoc(doc(db, "todos", todo.id), { title: title });
+  // };
 
-  const toggleComplete = async (todo) => {
-    await updateDoc(doc(db, "todos", todo.id), {
-      completed: !todo.completed,
-    });
-  };
+  // const toggleComplete = async (todo) => {
+  //   await updateDoc(doc(db, "todos", todo.id), {
+  //     completed: !todo.completed,
+  //   });
+  // };
 
   const handleDelete = async (id) => {
     await deleteDoc(doc(db, "todos", id));
@@ -56,9 +56,9 @@ function App() {
             <Todo
               key={todo.id}
               todo={todo}
-              toggleComplete={toggleComplete}
+              // toggleComplete={toggleComplete}
               handleDelete={handleDelete}
-              handleEdit={handleEdit}
+              // handleEdit={handleEdit}
             />
           ))}
         </div>
